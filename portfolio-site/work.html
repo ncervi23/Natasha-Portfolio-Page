@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected Work — Natasha Cervi</title>
+  <meta name="description" content="Selected work by Natasha Cervi: Bee &amp; Blossom, Moving Mountains, and Elevate Wellness — branding, web design, and UX/UI case studies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Natasha Cervi — Home">
+      <img src="assets/logo-transparent.png" alt="Natasha Cervi NC monogram logo" width="123" height="123">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">HOME</a>
+      <a href="work.html" aria-current="page">WORK</a>
+      <a href="resume.html">RESUME</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="work-title">SELECTED WORK</h1>
+    <p class="work-sub">A selection of branding, web, and digital design projects focused on thoughtful visuals and engaging user experiences.</p>
+
+    <!-- 01 — Bee & Blossom : text above, image below -->
+    <article class="project project--border">
+      <div class="project-info">
+        <p class="project-num">01.</p>
+        <h2 class="project-title">BEE &amp; BLOSSOM</h2>
+        <p class="project-tags">Branding • Web Design • UX/UI</p>
+        <p class="project-desc">A website redesign focused on creating a cohesive and engaging digital presence for a mobile bar service. The project combines brand consistency, usability, and responsive design to create an inviting customer experience.</p>
+        <a class="case-link" href="#" data-carousel="bee-blossom">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
+      </div>
+      <div class="project-media">
+        <img src="assets/project-bee-blossom.png" alt="Bee &amp; Blossom mobile bar website design" width="902" height="704">
+      </div>
+    </article>
+
+    <!-- 02 — Moving Mountains : text above, image below -->
+    <article class="project project--border">
+      <div class="project-info">
+        <p class="project-num">02.</p>
+        <h2 class="project-title">MOVING MOUNTAINS</h2>
+        <p class="project-tags">Brand Identity • Web Design • UX/UI</p>
+        <p class="project-desc">A personal design brand developed to showcase my creative services and visual identity. The project combines branding, responsive web design, and UX/UI principles to create a cohesive and professional digital experience.</p>
+        <a class="case-link" href="#" data-carousel="moving-mountains">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
+      </div>
+      <div class="project-media">
+        <img src="assets/project-moving-mountains.png" alt="Moving Mountains brand identity board" width="864" height="696">
+      </div>
+    </article>
+
+    <!-- 03 — Elevate Wellness : text above, image below -->
+    <article class="project project--border">
+      <div class="project-info">
+        <p class="project-num">03.</p>
+        <h2 class="project-title">ELEVATE WELLNESS</h2>
+        <p class="project-tags">UX/UI • Web Design • Branding</p>
+        <p class="project-desc">A wellness-focused digital experience designed with accessibility, simplicity, and user needs in mind. I developed the visual direction and interface to create a calming, approachable experience that makes wellness resources easy to explore.</p>
+        <a class="case-link" href="#" data-carousel="elevate-wellness">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
+      </div>
+      <div class="project-media">
+        <img src="assets/project-elevate-wellness.png" alt="Elevate Wellness website design" width="890" height="680">
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer footer-simple">
+    <div class="footer-bar">Designed by Natasha Cervi</div>
+  </footer>
+
+  <!-- Case-study carousel overlay (opens when a VIEW CASE STUDY link is clicked) -->
+  <div class="carousel" id="case-carousel" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Case study image gallery">
+    <div class="carousel-scrim" data-carousel-close></div>
+    <div class="carousel-stage">
+      <button class="carousel-close" type="button" data-carousel-close aria-label="Close gallery">&#10005;</button>
+      <button class="carousel-nav carousel-prev" type="button" data-carousel-prev aria-label="Previous image">
+        <img src="assets/arrow-left.svg" alt="" width="28" height="28">
+      </button>
+
+      <div class="carousel-viewport">
+        <div class="carousel-track"><!-- slides injected by js/site.js --></div>
+        <p class="carousel-empty" hidden>Case study images coming soon.</p>
+      </div>
+
+      <button class="carousel-nav carousel-next" type="button" data-carousel-next aria-label="Next image">
+        <img src="assets/arrow-right.svg" alt="" width="28" height="28">
+      </button>
+
+      <div class="carousel-caption">
+        <span class="carousel-title"></span>
+        <span class="carousel-count"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden slide sources.
+       Drop each project's images into assets/case-studies/<project>/ —
+       any image that fails to load is skipped automatically. -->
+  <div class="carousel-source" hidden aria-hidden="true">
+    <div data-slides="bee-blossom" data-title="BEE &amp; BLOSSOM">
+      <img src="assets/case-studies/bee-blossom/01.png" alt="Bee &amp; Blossom case study image 1">
+      <img src="assets/case-studies/bee-blossom/02.png" alt="Bee &amp; Blossom case study image 2">
+      <img src="assets/case-studies/bee-blossom/03.png" alt="Bee &amp; Blossom case study image 3">
+      <img src="assets/case-studies/bee-blossom/04.png" alt="Bee &amp; Blossom case study image 4">
+    </div>
+    <div data-slides="moving-mountains" data-title="MOVING MOUNTAINS">
+      <img src="assets/case-studies/moving-mountains/01.png" alt="Moving Mountains hero image">
+      <img src="assets/case-studies/moving-mountains/02.png" alt="Moving Mountains desktop design">
+      <img src="assets/case-studies/moving-mountains/03.png" alt="Moving Mountains mobile mockup">
+      <img src="assets/case-studies/moving-mountains/04.png" alt="Moving Mountains wireframes">
+      <img src="assets/case-studies/moving-mountains/05.png" alt="Moving Mountains design work">
+      <img src="assets/case-studies/moving-mountains/06.png" alt="Moving Mountains deliverables">
+    </div>
+    <div data-slides="elevate-wellness" data-title="ELEVATE WELLNESS">
+      <img src="assets/case-studies/elevate-wellness/01.png" alt="Elevate Wellness case study image 1">
+      <img src="assets/case-studies/elevate-wellness/02.png" alt="Elevate Wellness case study image 2">
+      <img src="assets/case-studies/elevate-wellness/03.png" alt="Elevate Wellness case study image 3">
+      <img src="assets/case-studies/elevate-wellness/04.png" alt="Elevate Wellness case study image 4">
+      <img src="assets/case-studies/elevate-wellness/05.png" alt="Elevate Wellness case study image 5">
+      <img src="assets/case-studies/elevate-wellness/06.png" alt="Elevate Wellness case study image 6">
+      <img src="assets/case-studies/elevate-wellness/07.png" alt="Elevate Wellness case study image 7">
+      <img src="assets/case-studies/elevate-wellness/08.png" alt="Elevate Wellness case study image 8">
+    </div>
+  </div>
+
+  <script src="js/site.js"></script>
+  <script src="js/carousel.js?v=1"></script>
+</body>
+</html>

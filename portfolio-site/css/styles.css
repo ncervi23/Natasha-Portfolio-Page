@@ -1,0 +1,637 @@
+/* ==========================================================================
+   Natasha Cervi — Portfolio
+   Design source: Figma "Portfolio-Website" — Wireframes (Desktop frames)
+   Target: static HTML/CSS/JS (Squarespace code-injection friendly)
+   ========================================================================== */
+
+/* ---- Design tokens (from Figma) ---- */
+:root {
+  --bg: #f7f5f2;                       /* page background */
+  --ink: #070707;                      /* primary text */
+  --mint: #8fceb6;                     /* accent */
+  --mint-soft: rgba(143, 206, 182, .27); /* skills panel */
+  --mint-line: #a2d5c2;                /* footer box border */
+  --footer-bg: #f4f4f6;
+  --dark-bar: #141824;
+  --font-main: 'Poppins', sans-serif;
+  --page-max: 1440px;
+  --gutter: clamp(24px, 8.6vw, 126px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  /* Sticky footer: pin the footer to the bottom on short pages */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh; /* small-viewport height where supported */
+}
+
+main { flex: 1 0 auto; } /* grows to fill leftover space, pushing footer down */
+
+body.page-home { background: #fff; } /* Home artboard is white in Figma */
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.container { max-width: var(--page-max); margin: 0 auto; }
+
+/* ==========================================================================
+   Header (all pages) — sticky nav bar
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px var(--gutter);
+  background: var(--bg);
+  border-bottom: 1px solid rgba(7, 7, 7, .06);
+}
+body.page-home .site-header { background: #fff; }
+
+.brand {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+}
+.brand img { width: 96px; height: 96px; object-fit: contain; }
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.2vw, 56px);
+  font-size: clamp(15px, 1.25vw, 19px);
+  font-weight: 500;
+  letter-spacing: .04em;
+  line-height: 1.2;
+}
+.main-nav a { transition: color .2s ease; }
+.main-nav a:hover { color: var(--mint); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 10px;
+}
+.nav-toggle span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: var(--ink);
+  margin: 6px 0;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* ==========================================================================
+   HOME
+   ========================================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 566px);
+  justify-content: space-between;
+  gap: 48px;
+  padding: 0 var(--gutter);
+  margin-top: clamp(40px, 6.5vw, 96px);
+}
+
+.hero-hi {
+  font-size: clamp(24px, 2.5vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.hero-title {
+  font-size: clamp(36px, 4.5vw, 65px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 16px;
+  white-space: nowrap; /* one line across the hero, per Figma (title sits above the photo) */
+}
+
+.hero-intro {
+  font-size: clamp(20px, 2.3vw, 34px);
+  line-height: 1.55;
+  max-width: 708px;
+  margin-top: clamp(32px, 4vw, 56px);
+}
+
+/* Hero photo — Figma "AI headshot 1": 566×580 @ x755 on the 1440 frame */
+.hero-photo {
+  position: relative;
+  width: min(566px, 100%);
+  justify-self: end;
+  align-self: start;
+  margin-right: -7px;                   /* photo overhangs the right gutter, per Figma */
+  margin-top: clamp(96px, 23vw, 332px); /* photo top sits ~332px below hero top, per Figma */
+}
+/* Mint accent panel behind photo — Figma "Rectangle 21": 484×634 @ x858.
+   It peeks 27px above and below the photo and 21px to its right,
+   while the photo hangs 103px past the panel's left edge. */
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: -27px -21px -27px 103px;
+  background: rgba(143, 206, 182, .5);
+}
+.hero-photo img {
+  position: relative; /* keeps the photo painted above the mint panel */
+  width: 100%;
+  height: auto;
+  aspect-ratio: 566 / 580;
+  object-fit: cover;
+}
+
+.home-cta {
+  padding: 0 var(--gutter);
+  /* breathing room between hero and CTA, per Figma (~289px) */
+  margin-top: clamp(160px, 24vw, 288px);
+}
+.home-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  transition: color .2s ease;
+}
+.home-cta a:hover { color: var(--mint); }
+
+.divider-line { width: 100%; height: 1px; }
+.home-divider {
+  padding: 0 var(--gutter) clamp(96px, 10vw, 150px); /* empty space below the line */
+  margin-top: 28px;                                   /* line sits just under CTA, per Figma */
+}
+.home-divider img { width: 100%; }
+
+/* ==========================================================================
+   WORK
+   ========================================================================== */
+.work-title {
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 500;
+  padding: 0 var(--gutter);
+  margin-top: clamp(36px, 4vw, 56px);
+}
+.work-sub {
+  padding: 0 var(--gutter);
+  font-size: clamp(19px, 1.9vw, 28px);
+  line-height: 1.5;
+  max-width: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Uniform stacked layout: text block on top, image underneath — identical for every project */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: clamp(32px, 4vw, 56px);
+  padding: 0 var(--gutter);
+  margin-top: clamp(72px, 10.5vw, 208px);
+}
+.project-info,
+.project-media { width: min(860px, 100%); }
+
+.project-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.project--border .project-media img { border: 1px solid #000; }
+
+/* Case-study image hover: gentle lift + lighter-mint frame + soft glow */
+.project-media:hover img {
+  transform: translateY(-6px);
+  box-shadow: 0 0 0 4px var(--mint-line), 0 18px 40px rgba(143, 206, 182, .45);
+}
+
+.project-num { font-size: 24px; }
+.project-title {
+  font-size: clamp(30px, 3.2vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 8px;
+}
+.project-tags {
+  font-size: clamp(18px, 1.6vw, 24px);
+  font-weight: 600;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+.project-desc {
+  font-size: clamp(18px, 1.7vw, 24px);
+  line-height: 1.45;
+  margin-top: 24px;
+}
+
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(18px, 1.7vw, 24px);
+  margin-top: 40px;
+  margin-left: -12px;
+  padding: 8px 12px;
+  transition: background .2s ease;
+}
+.case-link:hover { background: var(--mint-line); } /* lighter mint, matches arrow tone */
+
+.icon-arrow { width: 28px; height: 28px; flex: 0 0 auto; }
+/* Figma arrows are corner arrows — rotate to read as ← / → */
+.icon-arrow.arrow-left  { transform: rotate(135deg); }
+.icon-arrow.arrow-right { transform: rotate(-45deg); }
+.case-link:hover .icon-arrow.arrow-left  { transform: rotate(135deg) translateX(-4px); }
+.case-link:hover .icon-arrow.arrow-right { transform: rotate(-45deg) translateX(4px); }
+
+/* ==========================================================================
+   FOOTER (shared: Work + Contact) — #f4f4f6 band, 2px mint box, dark bar
+   ========================================================================== */
+.site-footer {
+  margin-top: clamp(72px, 8vw, 128px);
+  background: var(--footer-bg);
+  padding: 10px;
+}
+
+.footer-box {
+  max-width: 1420px;
+  margin: 0 auto;
+  border: 2px solid var(--mint-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: clamp(40px, 5vw, 64px) clamp(32px, 6vw, 88px);
+}
+
+.footer-cta h2 {
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+.footer-cta p {
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: 14px;
+  max-width: 520px;
+}
+
+.footer-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+.footer-side .footer-link {
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 600;
+  transition: color .2s ease;
+}
+.footer-side .footer-link:hover { color: var(--mint); }
+
+.footer-icons { display: flex; align-items: center; gap: 28px; }
+.footer-icons a { display: block; transition: opacity .2s ease; }
+.footer-icons a:hover { opacity: .6; }
+.footer-icons .icon-linkedin-sm { width: 82px; height: 59.7px; }
+.footer-icons .icon-email-sm    { width: 62px; height: 47.1
+}
+.footer-contact p a { text-decoration: underline; text-underline-offset: 4px; }
+.footer-contact .footer-linkedin { width: 62px; height: 42px; }
+
+.footer-bar {
+  background: var(--dark-bar);
+  color: #fff;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  height: 54px;
+  line-height: 54px;
+}
+
+/* Footer variant: black bar only, no mint box */
+.site-footer.footer-simple {
+  padding: 0;
+  background: transparent;
+  margin-top: clamp(180px, 18.5vw, 272px); /* ~8 lines below last VIEW CASE STUDY */
+}
+
+/* Contact: even more air before the footer so the page breathes */
+.page-contact .site-footer.footer-simple { margin-top: clamp(200px, 21vw, 310px); }
+
+/* ==========================================================================
+   RESUME
+   ========================================================================== */
+.resume-head { padding: 0 var(--gutter); margin-top: clamp(56px, 7vw, 104px); }
+.resume-head h1 { font-size: clamp(36px, 4.2vw, 60px); font-weight: 500; } /* matches Work page H1 */
+.resume-sub {
+  font-size: clamp(20px, 2vw, 32px);
+  font-weight: 500;
+  text-align: center;
+  max-width: 1220px;
+  margin: 22px auto 0;
+}
+.resume-intro {
+  font-size: clamp(17px, 1.55vw, 22px);
+  text-align: center;
+  max-width: 1244px;
+  margin: 28px auto 0;
+  line-height: 1.6;
+}
+
+.resume-divider-long {
+  width: min(1221px, 100%);
+  margin: 64px auto 0;
+  display: block;
+}
+
+.jobs { padding: 0 var(--gutter); margin-top: clamp(80px, 9vw, 132px); }
+.job { max-width: 1141px; }
+.job + .job { margin-top: clamp(48px, 4vw, 64px); } /* space below line = space above line */
+
+.job-title { font-size: clamp(22px, 2.2vw, 32px); font-weight: 500; }
+.job-title .job-num { font-weight: 400; }
+.job-meta { font-size: clamp(16px, 1.7vw, 24px); margin-top: 10px; line-height: 1.5; }
+.job-desc {
+  font-size: clamp(16px, 1.7vw, 24px);
+  line-height: 1.45;
+  margin-top: 14px;
+  max-width: 1100px;
+}
+
+.job-divider {
+  width: min(597px, 100%);
+  margin: clamp(48px, 4vw, 64px) 0 0;
+  border: none;
+  border-top: 1px solid #000;
+}
+
+.skills {
+  width: min(1264px, calc(100% - (var(--gutter) * 2)));
+  margin: clamp(96px, 11vw, 168px) auto 0;
+  background: transparent;                 /* mint appears on hover only */
+  transition: background .3s ease;
+  padding: clamp(48px, 4.5vw, 72px) clamp(32px, 4.5vw, 64px);
+  display: grid;
+  grid-template-columns: repeat(3, auto);   /* columns size to their content */
+  justify-content: space-between;
+  gap: clamp(28px, 3vw, 44px);
+}
+.skills:hover { background: var(--mint-soft); }
+.skills h2 { font-size: clamp(28px, 2.8vw, 40px); font-weight: 500; margin-bottom: 24px; }
+.skills ul { list-style: disc; padding-left: clamp(20px, 1.5vw, 28px); }
+.skills li { font-size: clamp(17px, 1.7vw, 25px); line-height: 1.8; white-space: nowrap; }
+
+.edu { padding: 0 var(--gutter); margin-top: clamp(96px, 11vw, 176px); }
+.edu h2 { font-size: clamp(28px, 2.9vw, 42px); font-weight: 400; }
+.edu-divider { width: min(586px, 100%); margin-top: 24px; display: block; }
+.edu-item-divider { width: min(586px, 100%); margin-top: clamp(48px, 4vw, 64px); display: block; }
+.edu-item + .edu-item { margin-top: clamp(48px, 4vw, 64px); }
+.edu-item h3 { font-size: clamp(24px, 2.5vw, 36px); font-weight: 500; }
+.edu-item p { font-size: clamp(20px, 2.2vw, 32px); margin-top: 6px; }
+
+.resume-download {
+  max-width: var(--page-max);
+  margin: clamp(96px, 8vw, 136px) auto clamp(48px, 4vw, 60px);
+  padding: 0 var(--gutter);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  font-size: clamp(24px, 2.5vw, 36px);
+}
+.resume-download a {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  transition: color .2s ease;
+}
+.resume-download a:hover { color: var(--mint); }
+.resume-download img { width: 56px; height: 56px; }
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+.contact-label {
+  color: var(--mint);
+  font-size: clamp(22px, 2.2vw, 32px);
+  padding: 0 var(--gutter);
+  margin-top: clamp(48px, 4.5vw, 72px);
+}
+
+.contact-title {
+  font-size: clamp(44px, 5.6vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+  line-height: 1.1;
+  padding: 0 var(--gutter);
+  margin-top: clamp(112px, 16.6vw, 240px);
+}
+
+.contact-blurb {
+  font-size: clamp(20px, 2.2vw, 32px);
+  letter-spacing: .01em;
+  text-align: center;
+  max-width: min(952px, 100%);
+  line-height: 1.5;
+  margin: clamp(28px, 2.2vw, 32px) auto 0;
+  padding: 0 24px;
+}
+
+.contact-divider-short {
+  width: min(481px, 60%);
+  margin: clamp(72px, 7.5vw, 112px) auto 0;
+  display: block;
+}
+
+.contact-cards {
+  width: min(726px, calc(100% - (var(--gutter) * 2)));
+  margin: clamp(72px, 7.5vw, 112px) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 5vw, 72px);
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 40px);
+  margin: 0 -16px;                /* bleed out so text/icons don't shift on hover */
+  padding: 14px 16px;
+  transition: background .2s ease;
+}
+/* Same mint hover as the Work page case-study links */
+.contact-card:hover { background: var(--mint-line); }
+.contact-card .card-icon { flex: 0 0 auto; }
+.contact-card .icon-email    { width: 100px; height: 68px; }
+.contact-card .icon-linkedin { width: 93.4px; height: 68px; }
+.contact-card .card-label { font-size: 20px; }
+.contact-card .card-value { font-size: clamp(18px, 1.7vw, 24px); letter-spacing: .04em; margin-top: 14px; }
+
+/* Footer: same simple footer as Work (black bar only — .site-footer.footer-simple) */
+
+/* ==========================================================================
+   CASE-STUDY CAROUSEL (Work page) — overlay gallery opened from VIEW CASE STUDY
+   ========================================================================== */
+body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery is open */
+
+.carousel {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+}
+.carousel[hidden] { display: none; }
+
+.carousel-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 7, 7, .78);
+  cursor: pointer;
+}
+
+.carousel-stage {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--bg);
+  padding: clamp(20px, 3.4vw, 44px) clamp(56px, 6vw, 84px) clamp(18px, 2.4vw, 28px);
+}
+
+.carousel-viewport { overflow: hidden; }
+.carousel-track {
+  display: flex;
+  transition: transform .35s ease;
+}
+.carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  max-height: 68vh;
+  object-fit: contain;
+  background: #fff;
+}
+.carousel-empty {
+  padding: clamp(40px, 8vw, 96px) 0;
+  text-align: center;
+  font-size: clamp(18px, 1.7vw, 24px);
+  color: rgba(7, 7, 7, .55);
+}
+
+/* Prev / next / close — same mint hover language as the clickable cards */
+.carousel-nav,
+.carousel-close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.carousel-nav:hover,
+.carousel-close:hover { background: var(--mint-line); }
+
+.carousel-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+}
+.carousel-prev { left: clamp(10px, 1.6vw, 20px); }
+.carousel-next { right: clamp(10px, 1.6vw, 20px); }
+
+.carousel-close {
+  top: clamp(10px, 1.6vw, 20px);
+  right: clamp(10px, 1.6vw, 20px);
+  width: 42px;
+  height: 42px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.carousel-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  font-weight: 600;
+}
+.carousel-title { font-size: clamp(18px, 1.7vw, 24px); letter-spacing: .04em; }
+.carousel-count { font-size: clamp(15px, 1.3vw, 18px); font-weight: 500; color: rgba(7, 7, 7, .6); }
+
+@media (max-width: 700px) {
+  .carousel-stage { padding-left: 20px; padding-right: 20px; }
+  .carousel-nav { width: 42px; height: 42px; top: auto; bottom: calc(100% + 10px); transform: none; }
+  .carousel-prev { left: 20px; }
+  .carousel-next { right: 20px; }
+  .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
+  .carousel-close:hover { background: rgba(255, 255, 255, .15); }
+  .carousel-close svg, .carousel-close { color: #fff; }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-title { white-space: normal; } /* let the title wrap once stacked */
+  .hero-photo { margin: 64px auto 0; }  /* stacked: center photo, drop the big Figma offset */
+  .skills { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .hero-photo::before { inset: -18px -12px -18px 56px; } /* scale panel offsets down on small screens */  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px var(--gutter) 32px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+  }
+  body.page-home .main-nav { background: #fff; }
+  .nav-open .main-nav { display: flex; }
+  .site-header { padding-top: 14px; padding-bottom: 14px; }
+  .brand, .brand img { width: 64px; height: 64px; }
+  .footer-box { flex-direction: column; align-items: flex-start; }
+  .footer-side { align-items: flex-start; }
+  .footer-icons { gap: 24px; }
+}
+
+@media (max-width: 560px) {
+  /* Contact: shrink icons and let long addresses wrap cleanly */
+  .contact-card { gap: 20px; }
+  .contact-card .icon-email    { width: 62px; height: auto; }
+  .contact-card .icon-linkedin { width: 58px; height: auto; }
+  .contact-card .card-value { word-break: break-word; }
+}
