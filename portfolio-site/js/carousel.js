@@ -26,8 +26,9 @@
 
   function pruneSlide(img) {
     /* drop slides whose image is missing so gaps never appear */
-    if (!img.parentNode) return;
-    img.parentNode.removeChild(img);
+    var slide = img.parentNode;
+    if (!slide) return;
+    slide.parentNode.removeChild(slide);
     total = track.children.length;
     if (!total) {
       emptyMsg.hidden = false;
@@ -48,8 +49,9 @@
     var defs = group.querySelectorAll('img');
     total = 0;
     Array.prototype.forEach.call(defs, function (def) {
+      var slide = document.createElement('div');
+      slide.className = 'carousel-slide';
       var img = document.createElement('img');
-      img.className = 'carousel-slide';
       img.alt = def.alt || '';
       img.draggable = false;
       img.addEventListener('error', function () { pruneSlide(img); });
@@ -58,7 +60,8 @@
         if (!img.naturalWidth) pruneSlide(img);
       });
       img.src = def.getAttribute('src');
-      track.appendChild(img);
+      slide.appendChild(img);
+      track.appendChild(slide);
       total = track.children.length;
     });
 

@@ -531,9 +531,18 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 .carousel-slide {
   flex: 0 0 100%;
   min-width: 0;
-  max-height: 68vh;
-  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fff;
+}
+/* Render images at native size (never upscale) — keeps low-res exports sharp */
+.carousel-slide img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 68vh;
 }
 .carousel-empty {
   padding: clamp(40px, 8vw, 96px) 0;
