@@ -45,7 +45,7 @@ hosting; GitHub Pages / Netlify / Vercel are free), then connect it to your
 domain's DNS or a subdomain (e.g. `portfolio.yourdomain.com`).
 
 ## Things to finish
-- `resume.html` links to `assets/Natasha-Cervi-Resume.pdf` — drop your real
-  resume PDF into `assets/` with that name.
-- "VIEW CASE STUDY" links on the Work page point to `#` until you create the
-  case-study pages.
+- ✅ Done: real resume PDF is in place — `resume.html` downloads
+  `assets/Natasha-C-Resume.pdf` (saves as "Natasha C_ Resume.pdf").
+- ✅ Done: "VIEW CASE STUDY" links on the Work page open an image carousel
+  (`js/carousel.js`); gallery images live in `assets/case-studies/<project>/`.
