@@ -338,6 +338,9 @@ body.page-home .site-header { background: #fff; }
 /* Contact: even more air before the footer so the page breathes */
 .page-contact .site-footer.footer-simple { margin-top: clamp(200px, 21vw, 310px); }
 
+/* Home: divider's bottom padding already provides the pre-footer air */
+.page-home .site-footer.footer-simple { margin-top: 0; }
+
 /* ==========================================================================
    RESUME
    ========================================================================== */
