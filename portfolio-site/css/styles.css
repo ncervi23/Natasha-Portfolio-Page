@@ -322,10 +322,18 @@ body.page-home .site-header { background: #fff; }
   background: var(--dark-bar);
   color: #fff;
   font-weight: 500;
-  font-size: 20px;
+  font-size: clamp(12px, 4vw, 20px); /* scales down on phones so the credit always fits one line */
   text-align: center;
-  height: 54px;
-  line-height: 54px;
+  min-height: 54px;             /* grows instead of clipping if text ever wraps */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: safe center; /* if it ever overflows, keep the start visible instead of clipping both ends */
+  padding: 8px 12px;
+  line-height: 1.3;
+  white-space: nowrap;          /* hard guarantee: "Cervi" can never drop to its own line */
+  -webkit-text-size-adjust: 100%; /* stop iOS Safari from inflating the font */
+  text-size-adjust: 100%;
 }
 
 /* Footer variant: black bar only, no mint box */
