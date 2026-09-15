@@ -649,9 +649,26 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 }
 
 @media (max-width: 560px) {
-  /* Contact: shrink icons and let long addresses wrap cleanly */
-  .contact-card { gap: 20px; }
+  /* Contact on phones: stack the icon over ONE centered line. The addresses
+     are too long to sit beside an icon, so they get the card's full width and
+     scale with the viewport — they can never wrap mid-word again. */
+  .contact-card {
+    flex-direction: column;
+    align-items: center;          /* fallback */
+    align-items: safe center;     /* if a tiny screen ever overflows, keep the start visible */
+    gap: 18px;
+    margin: 0;                    /* drop the hover bleed so centering is true */
+    padding: 14px 8px;
+    text-align: center;
+  }
   .contact-card .icon-email    { width: 62px; height: auto; }
   .contact-card .icon-linkedin { width: 58px; height: auto; }
-  .contact-card .card-value { word-break: break-word; }
+  .contact-card .card-label { font-size: 16px; }
+  .contact-card .card-value {
+    display: block;
+    font-size: clamp(13px, 4.2vw, 18px); /* ~16px on a 390px phone — one line, fits */
+    letter-spacing: 0;
+    white-space: nowrap;          /* hard guarantee: no mid-letter line breaks */
+    margin-top: 10px;
+  }
 }
