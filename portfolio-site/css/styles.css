@@ -218,10 +218,19 @@ body.page-home .site-header { background: #fff; }
 }
 .project--border .project-media img { border: 1px solid #000; }
 
-/* Case-study image hover: gentle lift + lighter-mint frame + soft glow */
-.project-media:hover img {
+/* Hero images open the case-study carousel too — show they're clickable */
+.project-media[data-carousel] { cursor: pointer; }
+
+/* Case-study image hover: gentle lift + lighter-mint frame + soft glow
+   (same treatment on keyboard focus) */
+.project-media:hover img,
+.project-media[data-carousel]:focus-visible img {
   transform: translateY(-6px);
   box-shadow: 0 0 0 4px var(--mint-line), 0 18px 40px rgba(143, 206, 182, .45);
+}
+.project-media[data-carousel]:focus-visible {
+  outline: 3px solid var(--mint-line);
+  outline-offset: 6px;
 }
 
 .project-num { font-size: 24px; }
@@ -241,6 +250,23 @@ body.page-home .site-header { background: #fff; }
   font-size: clamp(18px, 1.7vw, 24px);
   line-height: 1.45;
   margin-top: 24px;
+}
+
+/* Small project details (role / tools / focus) under the description */
+.project-meta {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.5;
+}
+.project-meta dt {
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.project-meta dd {
+  margin: 2px 0 0;
+  font-weight: 500;
 }
 
 .case-link {
@@ -555,6 +581,33 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
   max-width: 100%;
   max-height: 68vh;
 }
+
+/* Per-slide explainer caption under the picture */
+.carousel-slide--caption {
+  flex-direction: column;
+  gap: 14px;
+}
+.carousel-slide--caption img { max-height: 56vh; } /* leave room for the caption */
+.slide-caption {
+  max-width: 62ch;
+  padding: 0 16px 6px;
+  text-align: center;
+}
+.slide-caption-label {
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.slide-caption-title {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.slide-caption-text {
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.5;
+  margin-top: 8px;
+}
 .carousel-empty {
   padding: clamp(40px, 8vw, 96px) 0;
   text-align: center;
@@ -613,6 +666,8 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
   .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
   .carousel-close:hover { background: rgba(255, 255, 255, .15); }
   .carousel-close svg, .carousel-close { color: #fff; }
+  .carousel-slide--caption img { max-height: 48vh; }
+  .slide-caption { padding: 0 4px 4px; }
 }
 
 /* ==========================================================================

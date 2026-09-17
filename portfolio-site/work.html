@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=7">
   <!-- Footer credit: inlined so mobile can never receive a stale/cached stylesheet without it -->
   <style>
     .footer-bar {
@@ -57,10 +57,24 @@
         <p class="project-num">01.</p>
         <h2 class="project-title">BEE &amp; BLOSSOM</h2>
         <p class="project-tags">Branding • Web Design • UX/UI</p>
-        <p class="project-desc">A website redesign focused on creating a cohesive and engaging digital presence for a mobile bar service. The project combines brand consistency, usability, and responsive design to create an inviting customer experience.</p>
+        <p class="project-desc">Bee &amp; Blossom needed a website that clearly communicated its mobile bar services while creating a more polished and consistent customer experience. Working directly with the client, I redesigned the site around their goals and feedback, with a focus on clearer content organization, stronger visual hierarchy, and a responsive experience across desktop and mobile.</p>
+        <dl class="project-meta">
+          <div>
+            <dt>MY ROLE</dt>
+            <dd>UX/UI &amp; Brand Designer</dd>
+          </div>
+          <div>
+            <dt>TOOLS</dt>
+            <dd>Figma • Adobe Creative Cloud</dd>
+          </div>
+          <div>
+            <dt>PROJECT FOCUS</dt>
+            <dd>Responsive Web Design • Wireframing • Visual Hierarchy • Brand Consistency • Developer Collaboration</dd>
+          </div>
+        </dl>
         <a class="case-link" href="#" data-carousel="bee-blossom">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
       </div>
-      <div class="project-media">
+      <div class="project-media" data-carousel="bee-blossom" role="button" tabindex="0" aria-label="Open Bee &amp; Blossom case study gallery">
         <img src="assets/project-bee-blossom.png" alt="Bee &amp; Blossom mobile bar website design" width="902" height="704">
       </div>
     </article>
@@ -74,7 +88,7 @@
         <p class="project-desc">A personal design brand developed to showcase my creative services and visual identity. The project combines branding, responsive web design, and UX/UI principles to create a cohesive and professional digital experience.</p>
         <a class="case-link" href="#" data-carousel="moving-mountains">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
       </div>
-      <div class="project-media">
+      <div class="project-media" data-carousel="moving-mountains" role="button" tabindex="0" aria-label="Open Moving Mountains case study gallery">
         <img src="assets/project-moving-mountains.png" alt="Moving Mountains brand identity board" width="864" height="696">
       </div>
     </article>
@@ -88,7 +102,7 @@
         <p class="project-desc">A wellness-focused digital experience designed with accessibility, simplicity, and user needs in mind. I developed the visual direction and interface to create a calming, approachable experience that makes wellness resources easy to explore.</p>
         <a class="case-link" href="#" data-carousel="elevate-wellness">VIEW CASE STUDY <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28"></a>
       </div>
-      <div class="project-media">
+      <div class="project-media" data-carousel="elevate-wellness" role="button" tabindex="0" aria-label="Open Elevate Wellness case study gallery">
         <img src="assets/project-elevate-wellness.png" alt="Elevate Wellness website design" width="890" height="680">
       </div>
     </article>
@@ -128,10 +142,22 @@
        any image that fails to load is skipped automatically. -->
   <div class="carousel-source" hidden aria-hidden="true">
     <div data-slides="bee-blossom" data-title="BEE &amp; BLOSSOM">
-      <img src="assets/case-studies/bee-blossom/01.png" alt="Bee &amp; Blossom case study image 1">
-      <img src="assets/case-studies/bee-blossom/02.png" alt="Bee &amp; Blossom case study image 2">
-      <img src="assets/case-studies/bee-blossom/03.png" alt="Bee &amp; Blossom case study image 3">
-      <img src="assets/case-studies/bee-blossom/04.png" alt="Bee &amp; Blossom case study image 4">
+      <img src="assets/case-studies/bee-blossom/01.png" alt="Bee &amp; Blossom case study image 1"
+        data-caption-label="The Challenge / Brand Direction"
+        data-caption-title="Creating a Clearer Digital Experience"
+        data-caption-text="As Bee &amp; Blossom's services and content expanded, the website needed a clearer structure and a more consistent visual experience that could work across desktop and mobile.">
+      <img src="assets/case-studies/bee-blossom/02.png" alt="Bee &amp; Blossom case study image 2"
+        data-caption-label="Wireframes &amp; Structure"
+        data-caption-title="Organizing the Experience"
+        data-caption-text="I used wireframes to establish content hierarchy, page structure, and placement of key information before moving into the final visual design.">
+      <img src="assets/case-studies/bee-blossom/03.png" alt="Bee &amp; Blossom case study image 3"
+        data-caption-label="Responsive Design"
+        data-caption-title="Designing Across Screen Sizes"
+        data-caption-text="Desktop layouts were adapted for mobile by reconsidering spacing, content order, navigation, and image placement rather than simply scaling down the desktop design.">
+      <img src="assets/case-studies/bee-blossom/04.png" alt="Bee &amp; Blossom case study image 4"
+        data-caption-label="Final Design / Collaboration"
+        data-caption-title="From Design to Development"
+        data-caption-text="I worked with the developer throughout implementation to provide visual direction, assets, and feedback so the finished website remained consistent with the approved design and brand.">
     </div>
     <div data-slides="moving-mountains" data-title="MOVING MOUNTAINS">
       <img src="assets/case-studies/moving-mountains/01.png" alt="Moving Mountains hero image">
@@ -154,6 +180,6 @@
   </div>
 
   <script src="js/site.js"></script>
-  <script src="js/carousel.js?v=1"></script>
+  <script src="js/carousel.js?v=3"></script>
 </body>
 </html>

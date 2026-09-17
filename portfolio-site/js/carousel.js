@@ -61,6 +61,37 @@
       });
       img.src = def.getAttribute('src');
       slide.appendChild(img);
+
+      /* Optional per-slide caption: data-caption-label / -title / -text on the
+         source <img> in work.html become explainer text under the picture */
+      var capLabel = def.getAttribute('data-caption-label');
+      var capTitle = def.getAttribute('data-caption-title');
+      var capText = def.getAttribute('data-caption-text');
+      if (capLabel || capTitle || capText) {
+        slide.classList.add('carousel-slide--caption');
+        var caption = document.createElement('div');
+        caption.className = 'slide-caption';
+        if (capLabel) {
+          var lbl = document.createElement('p');
+          lbl.className = 'slide-caption-label';
+          lbl.textContent = capLabel;
+          caption.appendChild(lbl);
+        }
+        if (capTitle) {
+          var ttl = document.createElement('p');
+          ttl.className = 'slide-caption-title';
+          ttl.textContent = capTitle;
+          caption.appendChild(ttl);
+        }
+        if (capText) {
+          var txt = document.createElement('p');
+          txt.className = 'slide-caption-text';
+          txt.textContent = capText;
+          caption.appendChild(txt);
+        }
+        slide.appendChild(caption);
+      }
+
       track.appendChild(slide);
       total = track.children.length;
     });
@@ -87,12 +118,21 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  /* Wire the VIEW CASE STUDY links */
-  Array.prototype.forEach.call(document.querySelectorAll('.case-link[data-carousel]'), function (link) {
-    link.addEventListener('click', function (e) {
+  /* Wire the VIEW CASE STUDY links AND the clickable project hero images */
+  Array.prototype.forEach.call(document.querySelectorAll('.case-link[data-carousel], .project-media[data-carousel]'), function (el) {
+    el.addEventListener('click', function (e) {
       e.preventDefault();
-      open(link.getAttribute('data-carousel'));
+      open(el.getAttribute('data-carousel'));
     });
+    /* hero images are divs, not links — add keyboard support (Enter / Space) */
+    if (el.tagName !== 'A') {
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(el.getAttribute('data-carousel'));
+        }
+      });
+    }
   });
 
   /* Controls */
