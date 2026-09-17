@@ -149,4 +149,51 @@
     else if (e.key === 'ArrowLeft') { index--; render(); }
     else if (e.key === 'ArrowRight') { index++; render(); }
   });
+
+  /* Touch swipe (mobile): drag the track with your finger, release to change
+     slide. Vertical drags still scroll the page normally. */
+  var viewport = carousel.querySelector('.carousel-viewport');
+  var touchStartX = 0, touchStartY = 0, touchCurX = 0;
+  var touching = false, touchHorizontal = null;
+
+  viewport.addEventListener('touchstart', function (e) {
+    if (!total) return;
+    touching = true;
+    touchHorizontal = null;
+    var t = e.touches[0];
+    touchStartX = touchCurX = t.clientX;
+    touchStartY = t.clientY;
+  }, { passive: true });
+
+  viewport.addEventListener('touchmove', function (e) {
+    if (!touching) return;
+    var t = e.touches[0];
+    var dx = t.clientX - touchStartX;
+    var dy = t.clientY - touchStartY;
+    /* decide once per gesture whether it's a horizontal swipe */
+    if (touchHorizontal === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      touchHorizontal = Math.abs(dx) > Math.abs(dy);
+    }
+    if (!touchHorizontal) return;
+    touchCurX = t.clientX;
+    /* let the track follow the finger */
+    track.style.transition = 'none';
+    track.style.transform = 'translateX(calc(-' + (index * 100) + '% + ' + dx + 'px))';
+    if (e.cancelable) e.preventDefault(); /* keep the page from scrolling sideways under the swipe */
+  }, { passive: false });
+
+  function endTouch() {
+    if (!touching) return;
+    touching = false;
+    track.style.transition = '';
+    var dx = touchCurX - touchStartX;
+    var width = viewport.clientWidth || 1;
+    /* commit the swipe if it was long enough (15% of width or 40px) */
+    if (touchHorizontal && Math.abs(dx) > Math.max(40, width * 0.15)) {
+      index += (dx < 0) ? 1 : -1;
+    }
+    render();
+  }
+  viewport.addEventListener('touchend', endTouch);
+  viewport.addEventListener('touchcancel', endTouch);
 })();

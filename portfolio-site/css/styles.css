@@ -660,9 +660,12 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 
 @media (max-width: 700px) {
   .carousel-stage { padding-left: 20px; padding-right: 20px; }
-  .carousel-nav { width: 42px; height: 42px; top: auto; bottom: calc(100% + 10px); transform: none; }
-  .carousel-prev { left: 20px; }
-  .carousel-next { right: 20px; }
+  /* Arrows sit at the bottom of the picture, flanking the title/count bar
+     (mobile users can also swipe the image itself) */
+  .carousel-nav { width: 44px; height: 44px; top: auto; bottom: 10px; transform: none; }
+  .carousel-prev { left: 10px; }
+  .carousel-next { right: 10px; }
+  .carousel-caption { padding-left: 60px; padding-right: 60px; }
   .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
   .carousel-close:hover { background: rgba(255, 255, 255, .15); }
   .carousel-close svg, .carousel-close { color: #fff; }
