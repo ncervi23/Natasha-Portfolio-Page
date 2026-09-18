@@ -125,13 +125,6 @@ body.page-home .site-header { background: #fff; }
   white-space: nowrap; /* one line across the hero, per Figma (title sits above the photo) */
 }
 
-/* Services line under the title — sized to stay on ONE line beside the photo */
-.hero-tags {
-  font-size: clamp(16px, 1.5vw, 20px);
-  font-weight: 600;
-  margin-top: 14px;
-}
-
 .hero-intro {
   font-size: clamp(20px, 2.3vw, 34px);
   line-height: 1.55;
@@ -167,8 +160,8 @@ body.page-home .site-header { background: #fff; }
 
 .home-cta {
   padding: 0 var(--gutter);
-  text-align: right;                    /* VIEW MY WORK sits at the right edge, under the hero photo */
-  margin-top: clamp(40px, 5vw, 64px);   /* clears the mint panel peeking 27px below the photo */
+  /* breathing room between hero and CTA, per Figma (~289px) */
+  margin-top: clamp(160px, 24vw, 288px);
 }
 .home-cta a {
   display: inline-flex;
@@ -195,7 +188,6 @@ body.page-home .site-header { background: #fff; }
   font-weight: 500;
   padding: 0 var(--gutter);
   margin-top: clamp(36px, 4vw, 56px);
-  text-align: center; /* matches the centered headers on Resume + Contact */
 }
 .work-sub {
   padding: 0 var(--gutter);
@@ -217,7 +209,6 @@ body.page-home .site-header { background: #fff; }
 }
 .project-info,
 .project-media { width: min(860px, 100%); }
-/* Structured editorial axis: everything flush left on the image's left edge */
 
 .project-media img {
   width: 100%;
@@ -261,15 +252,11 @@ body.page-home .site-header { background: #fff; }
   margin-top: 24px;
 }
 
-/* Project spec row — role / tools / focus as three columns under a rule,
-   like a case-study facts sheet (stacks on mobile) */
+/* Small project details (role / tools / focus) under the description */
 .project-meta {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 2fr);
-  gap: 24px;
-  margin-top: 32px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(7, 7, 7, .15);
+  gap: 14px;
+  margin-top: 28px;
   font-size: clamp(13px, 1.2vw, 16px);
   line-height: 1.5;
 }
@@ -288,6 +275,7 @@ body.page-home .site-header { background: #fff; }
   gap: 12px;
   font-size: clamp(18px, 1.7vw, 24px);
   margin-top: 40px;
+  margin-left: -12px;
   padding: 8px 12px;
   transition: background .2s ease;
 }
@@ -299,6 +287,66 @@ body.page-home .site-header { background: #fff; }
 .icon-arrow.arrow-right { transform: rotate(-45deg); }
 .case-link:hover .icon-arrow.arrow-left  { transform: rotate(135deg) translateX(-4px); }
 .case-link:hover .icon-arrow.arrow-right { transform: rotate(-45deg) translateX(4px); }
+
+/* ==========================================================================
+   MORE OF MY WORK — horizontal scroll gallery (bottom of Work page)
+   ========================================================================== */
+.more-work { margin-top: clamp(96px, 12vw, 176px); }
+.more-work-title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 500;
+  text-align: center;
+  padding: 0 var(--gutter);
+}
+.more-work-sub {
+  text-align: center;
+  padding: 0 var(--gutter);
+  font-size: clamp(16px, 1.5vw, 22px);
+  margin-top: 12px;
+}
+.more-work-strip {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 32px var(--gutter) 8px;
+  -webkit-overflow-scrolling: touch;
+}
+/* Subtle scroll hint for the strip (thin bar, mint thumb) */
+.more-work-strip::-webkit-scrollbar { height: 6px; }
+.more-work-strip::-webkit-scrollbar-track { background: rgba(7, 7, 7, .06); }
+.more-work-strip::-webkit-scrollbar-thumb { background: var(--mint); }
+.more-work-strip { scrollbar-width: thin; scrollbar-color: var(--mint) rgba(7, 7, 7, .06); }
+.more-work-item {
+  position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border: 1px solid #000;
+  margin: 0;
+}
+.more-work-item img {
+  display: block;
+  height: clamp(180px, 24vw, 280px);
+  width: auto;
+}
+/* Hover (desktop) / focus (mobile tap): mint overlay + centered title */
+.more-work-item figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(143, 206, 182, .88);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: clamp(15px, 1.4vw, 20px);
+  padding: 12px;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.more-work-item:hover figcaption,
+.more-work-item:focus-visible figcaption { opacity: 1; }
 
 /* ==========================================================================
    FOOTER (shared: Work + Contact) — #f4f4f6 band, 2px mint box, dark bar
@@ -642,10 +690,6 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 .carousel-nav:hover,
 .carousel-close:hover { background: var(--mint-line); }
 
-/* SVGs are Figma corner arrows — rotate to read as ← / → (same as page arrows) */
-.carousel-prev img { transform: rotate(135deg); }
-.carousel-next img { transform: rotate(-45deg); }
-
 .carousel-nav {
   top: 50%;
   transform: translateY(-50%);
@@ -676,29 +720,12 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 
 @media (max-width: 700px) {
   .carousel-stage { padding-left: 20px; padding-right: 20px; }
-  .project-meta { grid-template-columns: 1fr; gap: 14px; }
-  /* Bottom bar: one-line title with small mint arrows beside it
-     (no white boxes), count on its own line underneath.
-     Users can also swipe the image itself. */
-  .carousel-caption {
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 0 36px;
-  }
-  .carousel-title { font-size: 15px; white-space: nowrap; }
-  .carousel-count { white-space: nowrap; }
-  .carousel-nav {
-    top: auto;
-    bottom: 26px;               /* centers on the title line */
-    width: 32px; height: 32px;
-    background: transparent;    /* no white box — mint arrow only */
-    border: none;
-  }
-  .carousel-nav:hover { background: transparent; }
-  .carousel-nav img { width: 20px; height: 20px; }
-  .carousel-prev { left: 6px; }
-  .carousel-next { right: 6px; }
+  /* Arrows sit at the bottom of the picture, flanking the title/count bar
+     (mobile users can also swipe the image itself) */
+  .carousel-nav { width: 44px; height: 44px; top: auto; bottom: 10px; transform: none; }
+  .carousel-prev { left: 10px; }
+  .carousel-next { right: 10px; }
+  .carousel-caption { padding-left: 60px; padding-right: 60px; }
   .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
   .carousel-close:hover { background: rgba(255, 255, 255, .15); }
   .carousel-close svg, .carousel-close { color: #fff; }
@@ -710,11 +737,8 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
    Responsive
    ========================================================================== */
 @media (max-width: 1100px) {
-  .hero { grid-template-columns: minmax(0, 1fr); overflow-x: clip; } /* minmax(0): nowrap title must never blow out the grid; clip: no sideways scroll while fonts swap in */
-  /* Keep the title on ONE line when stacked — scale it to the viewport.
-     Measured: the string is ~13.4px wide per 1px of font size in Poppins;
-     5.7vw fits inside the gutters even with a classic scrollbar. */
-  .hero-title { white-space: nowrap; font-size: min(65px, 5.7vw); }
+  .hero { grid-template-columns: 1fr; }
+  .hero-title { white-space: normal; } /* let the title wrap once stacked */
   .hero-photo { margin: 64px auto 0; }  /* stacked: center photo, drop the big Figma offset */
   .skills { grid-template-columns: 1fr; gap: 32px; }
 }
