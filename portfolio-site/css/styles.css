@@ -630,6 +630,10 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 .carousel-nav:hover,
 .carousel-close:hover { background: var(--mint-line); }
 
+/* SVGs are Figma corner arrows — rotate to read as ← / → (same as page arrows) */
+.carousel-prev img { transform: rotate(135deg); }
+.carousel-next img { transform: rotate(-45deg); }
+
 .carousel-nav {
   top: 50%;
   transform: translateY(-50%);
@@ -660,12 +664,28 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 
 @media (max-width: 700px) {
   .carousel-stage { padding-left: 20px; padding-right: 20px; }
-  /* Arrows sit at the bottom of the picture, flanking the title/count bar
-     (mobile users can also swipe the image itself) */
-  .carousel-nav { width: 44px; height: 44px; top: auto; bottom: 10px; transform: none; }
-  .carousel-prev { left: 10px; }
-  .carousel-next { right: 10px; }
-  .carousel-caption { padding-left: 60px; padding-right: 60px; }
+  /* Bottom bar: one-line title with small mint arrows beside it
+     (no white boxes), count on its own line underneath.
+     Users can also swipe the image itself. */
+  .carousel-caption {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 0 36px;
+  }
+  .carousel-title { font-size: 15px; white-space: nowrap; }
+  .carousel-count { white-space: nowrap; }
+  .carousel-nav {
+    top: auto;
+    bottom: 26px;               /* centers on the title line */
+    width: 32px; height: 32px;
+    background: transparent;    /* no white box — mint arrow only */
+    border: none;
+  }
+  .carousel-nav:hover { background: transparent; }
+  .carousel-nav img { width: 20px; height: 20px; }
+  .carousel-prev { left: 6px; }
+  .carousel-next { right: 6px; }
   .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
   .carousel-close:hover { background: rgba(255, 255, 255, .15); }
   .carousel-close svg, .carousel-close { color: #fff; }
