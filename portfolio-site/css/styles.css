@@ -289,7 +289,7 @@ body.page-home .site-header { background: #fff; }
 .case-link:hover .icon-arrow.arrow-right { transform: rotate(-45deg) translateX(4px); }
 
 /* ==========================================================================
-   MORE OF MY WORK — horizontal scroll gallery (bottom of Work page)
+   MORE OF MY WORK — auto-scrolling gallery (bottom of Work page)
    ========================================================================== */
 .more-work { margin-top: clamp(96px, 12vw, 176px); }
 .more-work-title {
@@ -305,22 +305,37 @@ body.page-home .site-header { background: #fff; }
   margin-top: 12px;
 }
 .more-work-strip {
+  overflow: hidden;
+  padding: 32px 0 8px;
+}
+.more-work-track {
+  display: flex;
+  width: max-content;
+  animation: more-work-scroll 60s linear infinite;
+}
+/* Pause the scroll on hover/focus so the mint captions are readable */
+.more-work-strip:hover .more-work-track,
+.more-work-strip:focus-within .more-work-track { animation-play-state: paused; }
+.more-work-set {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding: 32px var(--gutter) 8px;
-  -webkit-overflow-scrolling: touch;
+  padding-right: 20px; /* matches the gap so the -50% loop lands seamlessly */
 }
-/* Subtle scroll hint for the strip (thin bar, mint thumb) */
-.more-work-strip::-webkit-scrollbar { height: 6px; }
-.more-work-strip::-webkit-scrollbar-track { background: rgba(7, 7, 7, .06); }
-.more-work-strip::-webkit-scrollbar-thumb { background: var(--mint); }
-.more-work-strip { scrollbar-width: thin; scrollbar-color: var(--mint) rgba(7, 7, 7, .06); }
+@keyframes more-work-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+/* Reduced motion: stop the auto-scroll and restore manual swiping */
+@media (prefers-reduced-motion: reduce) {
+  .more-work-track { animation: none; }
+  .more-work-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
 .more-work-item {
   position: relative;
   flex: 0 0 auto;
-  scroll-snap-align: start;
   border: 1px solid #000;
   margin: 0;
 }
