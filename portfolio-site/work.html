@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=14">
+  <link rel="stylesheet" href="css/styles.css?v=15">
   <!-- Footer credit: inlined so mobile can never receive a stale/cached stylesheet without it -->
   <style>
     .footer-bar {
@@ -142,7 +142,11 @@
   <section class="more-work" aria-label="More of My Work">
     <h2 class="more-work-title">More of My Work</h2>
     <p class="more-work-sub">A collection of branding, packaging, print, digital, advertising, and visual design projects.</p>
-    <div class="more-work-strip">
+    <div class="more-work-frame">
+      <button class="gallery-nav gallery-prev" type="button" aria-label="Previous work image">
+        <img class="icon-arrow arrow-left" src="assets/arrow-left.svg" alt="" width="28" height="28">
+      </button>
+      <div class="more-work-strip">
       <div class="more-work-track">
         <div class="more-work-set">
           <figure class="more-work-item" tabindex="0">
@@ -214,6 +218,10 @@
           </figure>
         </div>
       </div>
+      </div>
+      <button class="gallery-nav gallery-next" type="button" aria-label="Next work image">
+        <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28">
+      </button>
     </div>
   </section>
 
@@ -227,7 +235,7 @@
     <div class="carousel-stage">
       <button class="carousel-close" type="button" data-carousel-close aria-label="Close gallery">&#10005;</button>
       <button class="carousel-nav carousel-prev" type="button" data-carousel-prev aria-label="Previous image">
-        <img src="assets/arrow-left.svg" alt="" width="28" height="28">
+        <img class="icon-arrow arrow-left" src="assets/arrow-left.svg" alt="" width="28" height="28">
       </button>
 
       <div class="carousel-viewport">
@@ -236,7 +244,7 @@
       </div>
 
       <button class="carousel-nav carousel-next" type="button" data-carousel-next aria-label="Next image">
-        <img src="assets/arrow-right.svg" alt="" width="28" height="28">
+        <img class="icon-arrow arrow-right" src="assets/arrow-right.svg" alt="" width="28" height="28">
       </button>
 
       <div class="carousel-caption">
@@ -318,5 +326,6 @@
 
   <script src="js/site.js"></script>
   <script src="js/carousel.js?v=4"></script>
+  <script src="js/gallery.js?v=1"></script>
 </body>
 </html>

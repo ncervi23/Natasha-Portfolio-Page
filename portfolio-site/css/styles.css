@@ -160,8 +160,8 @@ body.page-home .site-header { background: #fff; }
 
 .home-cta {
   padding: 0 var(--gutter);
-  /* breathing room between hero and CTA, per Figma (~289px) */
-  margin-top: clamp(160px, 24vw, 288px);
+  text-align: right;                  /* CTA sits under the hero photo, in line with its right edge */
+  margin-top: clamp(40px, 6vw, 64px); /* snug gap below the hero (mint panel overhang included) */
 }
 .home-cta a {
   display: inline-flex;
@@ -362,6 +362,62 @@ body.page-home .site-header { background: #fff; }
 }
 .more-work-item:hover figcaption,
 .more-work-item:focus-visible figcaption { opacity: 1; }
+
+/* Mobile: the auto-scroll marquee becomes a one-picture carousel — an arrow on
+   each side of the picture (js/gallery.js); tapping the picture or an arrow
+   pages to the next image. Desktop keeps the seamless auto-scroll. */
+.more-work-frame { position: relative; }
+.gallery-nav {
+  display: none; /* desktop keeps the auto-scrolling marquee */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.gallery-prev { left: 2px; }
+.gallery-next { right: 2px; }
+.gallery-nav:hover .icon-arrow.arrow-left  { transform: rotate(135deg) translateX(-4px); }
+.gallery-nav:hover .icon-arrow.arrow-right { transform: rotate(-45deg) translateX(4px); }
+
+@media (max-width: 700px) {
+  .gallery-nav { display: flex; }
+  .more-work-strip {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-top: 8px;
+  }
+  .more-work-strip::-webkit-scrollbar { display: none; }
+  .more-work-track { animation: none; width: auto; } /* items size to the strip, not max-content */
+  .more-work-set { gap: 0; padding-right: 0; }
+  .more-work-set[aria-hidden="true"] { display: none; } /* no loop needed when paging */
+  .more-work-item {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    border: 0;                    /* frame moves to the img so it hugs the picture */
+    display: flex;
+    justify-content: center;
+    -webkit-touch-callout: none;
+  }
+  .more-work-item img {
+    height: clamp(220px, 46vw, 320px);
+    width: auto;
+    max-width: calc(100% - 96px); /* stay clear of the side arrows */
+    border: 1px solid #000;
+    -webkit-user-drag: none;
+  }
+  .more-work-item figcaption { display: none; } /* tap = next picture */
+}
 
 /* ==========================================================================
    FOOTER (shared: Work + Contact) — #f4f4f6 band, 2px mint box, dark bar
@@ -690,8 +746,7 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
   color: rgba(7, 7, 7, .55);
 }
 
-/* Prev / next / close — same mint hover language as the clickable cards */
-.carousel-nav,
+/* Close — boxed ✕, matches the clickable-card language */
 .carousel-close {
   position: absolute;
   display: flex;
@@ -702,15 +757,27 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
   cursor: pointer;
   transition: background .2s ease;
 }
-.carousel-nav:hover,
 .carousel-close:hover { background: var(--mint-line); }
 
+/* Prev / next — the SAME thin mint corner arrow used next to VIEW CASE STUDY
+   (the imgs carry .icon-arrow .arrow-left/.arrow-right so they rotate to read
+   ← / →). Plain borderless hit-areas — no white square behind them. */
 .carousel-nav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 12px;
+  cursor: pointer;
   top: 50%;
   transform: translateY(-50%);
   width: 52px;
   height: 52px;
 }
+.carousel-nav:hover .icon-arrow.arrow-left  { transform: rotate(135deg) translateX(-4px); }
+.carousel-nav:hover .icon-arrow.arrow-right { transform: rotate(-45deg) translateX(4px); }
 .carousel-prev { left: clamp(10px, 1.6vw, 20px); }
 .carousel-next { right: clamp(10px, 1.6vw, 20px); }
 
@@ -735,15 +802,29 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 
 @media (max-width: 700px) {
   .carousel-stage { padding-left: 20px; padding-right: 20px; }
-  /* Arrows sit at the bottom of the picture, flanking the title/count bar
-     (mobile users can also swipe the image itself) */
-  .carousel-nav { width: 44px; height: 44px; top: auto; bottom: 10px; transform: none; }
-  .carousel-prev { left: 10px; }
-  .carousel-next { right: 10px; }
-  .carousel-caption { padding-left: 60px; padding-right: 60px; }
+  /* Arrows flank the caption bar at the bottom of the picture, vertically
+     centered on the title line (mobile users can also swipe the image) */
+  .carousel-nav { width: 44px; height: 44px; padding: 8px; top: auto; bottom: 24px; transform: none; }
+  .carousel-prev { left: 4px; }
+  .carousel-next { right: 4px; }
+  /* Title on one line, page count on its own line beneath — always in line */
+  .carousel-caption {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+  .carousel-title {
+    font-size: 15px;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .carousel-count { font-size: 13px; }
   .carousel-close { top: -52px; right: 0; background: transparent; border-color: #fff; color: #fff; }
   .carousel-close:hover { background: rgba(255, 255, 255, .15); }
-  .carousel-close svg, .carousel-close { color: #fff; }
   .carousel-slide--caption img { max-height: 48vh; }
   .slide-caption { padding: 0 4px 4px; }
 }
