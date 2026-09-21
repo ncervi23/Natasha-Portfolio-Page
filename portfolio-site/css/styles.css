@@ -230,14 +230,25 @@ body.page-home .site-header { background: #fff; }
 .project--border .project-media img { border: 1px solid #000; }
 
 /* 04 — video project: same frame treatment as the case-study images */
+.project-media--video { position: relative; }
 .project-media video {
   display: block;
   width: 100%;
   height: auto;
   background: #000;
-  cursor: pointer; /* signals click-to-play anywhere on the picture */
 }
 .project--border .project-media video { border: 1px solid #000; }
+/* Transparent tap-catcher over the picture: click = play/pause.
+   Bottom 52px stays uncovered so the native control bar works normally. */
+.video-tap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: 52px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
 
 /* Hero images open the case-study carousel too — show they're clickable */
 .project-media[data-carousel] { cursor: pointer; }

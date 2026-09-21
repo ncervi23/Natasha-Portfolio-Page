@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=25">
+  <link rel="stylesheet" href="css/styles.css?v=26">
   <!-- Footer credit: inlined so mobile can never receive a stale/cached stylesheet without it -->
   <style>
     .footer-bar {
@@ -171,6 +171,10 @@
           <source src="assets/videos/premiere-showcase.mp4" type="video/mp4">
           Your browser does not support embedded video.
         </video>
+        <!-- Transparent tap-catcher: click/tap anywhere on the picture to
+             play/pause. Stops above the native control bar so the arrow,
+             scrubber and volume keep working untouched. -->
+        <button class="video-tap" type="button" aria-label="Play or pause video"></button>
       </div>
     </article>
   </main>
@@ -365,11 +369,13 @@
 
   <script src="js/site.js"></script>
   <script>
-    // 04 video: click anywhere on the picture to play/pause.
-    // The native control bar (play arrow, scrubber, volume) is unaffected —
-    // browsers keep those clicks from reaching this handler.
-    document.querySelectorAll('.project-media--video video').forEach(function (v) {
-      v.addEventListener('click', function () {
+    // 04 video: the .video-tap overlay toggles play/pause. Using a real button
+    // (not a video click handler) because browsers intercept taps on
+    // <video controls> surfaces — iOS never delivers those clicks to the page.
+    document.querySelectorAll('.project-media--video').forEach(function (wrap) {
+      var v = wrap.querySelector('video');
+      var tap = wrap.querySelector('.video-tap');
+      tap.addEventListener('click', function () {
         if (v.paused) { v.play(); } else { v.pause(); }
       });
     });
