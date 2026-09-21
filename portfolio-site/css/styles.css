@@ -250,7 +250,10 @@ body.page-home .site-header { background: #fff; }
   align-items: baseline;
   gap: 14px;
 }
-.project-num { font-size: 22px; }
+.project-num {
+  font-size: clamp(22px, 2.38vw, 34px); /* ~85% of the title — same size optically, not literally */
+  font-weight: 400;                   /* lighter than the title's 600 */
+}
 .project-title {
   font-size: clamp(26px, 2.8vw, 40px); /* smaller + lighter than the H1 so SELECTED WORK leads */
   font-weight: 600;
