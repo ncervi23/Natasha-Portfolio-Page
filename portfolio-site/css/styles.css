@@ -229,7 +229,9 @@ body.page-home .site-header { background: #fff; }
 }
 .project--border .project-media img { border: 1px solid #000; }
 
-/* 04 — video project: same frame treatment as the case-study images */
+/* 04 — video project: same frame treatment as the case-study images.
+   Text sits closer to the video than the image projects' gap. */
+.project--video { gap: clamp(20px, 2.5vw, 32px); }
 .project-media--video { position: relative; }
 .project-media video {
   display: block;
