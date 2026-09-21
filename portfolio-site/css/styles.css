@@ -184,25 +184,36 @@ body.page-home .site-header { background: #fff; }
    WORK
    ========================================================================== */
 .work-title {
-  font-size: clamp(36px, 4.2vw, 60px);
-  font-weight: 500;
+  font-size: clamp(52px, 6vw, 92px); /* clearly dominates project titles */
+  font-weight: 700;
+  letter-spacing: .01em;
+  line-height: 1.05;
   padding: 0 var(--gutter);
-  margin-top: clamp(36px, 4vw, 56px);
+  margin-top: clamp(40px, 4.5vw, 64px);
 }
 .work-sub {
   padding: 0 var(--gutter);
   font-size: clamp(19px, 1.9vw, 28px);
   line-height: 1.5;
-  max-width: none;
-  text-align: center;
+  max-width: min(920px, 100%);
+  text-align: left; /* header reads as one left-aligned block with the H1 */
   margin-top: 20px;
 }
+/* Hairline closing the header block — echoes the home-page divider */
+.work-rule {
+  width: calc(100% - (var(--gutter) * 2));
+  margin: clamp(32px, 4vw, 56px) auto 0;
+  border: none;
+  border-top: 1px solid #000;
+}
+/* First project sits close under the header; later projects keep the big break */
+.project:first-of-type { margin-top: clamp(48px, 6vw, 88px); }
 
 /* Uniform stacked layout: text block on top, image underneath — identical for every project */
 .project {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  justify-items: center;
+  justify-items: start; /* left edge of every project lines up with SELECTED WORK */
   gap: clamp(32px, 4vw, 56px);
   padding: 0 var(--gutter);
   margin-top: clamp(72px, 10.5vw, 208px);
@@ -233,12 +244,17 @@ body.page-home .site-header { background: #fff; }
   outline-offset: 6px;
 }
 
-.project-num { font-size: 24px; }
+/* Number + title share one baseline-aligned line: "01. BEE & BLOSSOM" */
+.project-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.project-num { font-size: 22px; }
 .project-title {
-  font-size: clamp(30px, 3.2vw, 46px);
-  font-weight: 700;
+  font-size: clamp(26px, 2.8vw, 40px); /* smaller + lighter than the H1 so SELECTED WORK leads */
+  font-weight: 600;
   line-height: 1.15;
-  margin-top: 8px;
 }
 .project-tags {
   font-size: clamp(18px, 1.6vw, 24px);
@@ -863,6 +879,8 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 }
 
 @media (max-width: 560px) {
+  /* H1 stays on ONE line here — the big clamp() min would wrap "SELECTED WORK" on phones */
+  .work-title { font-size: clamp(30px, 8.6vw, 44px); }
   /* Contact on phones: stack the icon over ONE centered line. The addresses
      are too long to sit beside an icon, so they get the card's full width and
      scale with the viewport — they can never wrap mid-word again. */
