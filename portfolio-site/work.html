@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=22">
+  <link rel="stylesheet" href="css/styles.css?v=25">
   <!-- Footer credit: inlined so mobile can never receive a stale/cached stylesheet without it -->
   <style>
     .footer-bar {
@@ -139,6 +139,38 @@
       </div>
       <div class="project-media" data-carousel="elevate-wellness" role="button" tabindex="0" aria-label="Open Elevate Wellness case study gallery">
         <img src="assets/project-elevate-wellness.png" alt="Elevate Wellness website design" width="890" height="680">
+      </div>
+    </article>
+
+    <!-- 04 — Video Editing & Motion : text above, video below -->
+    <article class="project project--border">
+      <div class="project-info">
+        <div class="project-heading">
+          <p class="project-num">04.</p>
+          <h2 class="project-title">VIDEO EDITING &amp; MOTION</h2>
+        </div>
+        <p class="project-tags">Premiere Pro • Video Editing • Visual Storytelling</p>
+        <p class="project-desc">An exploration of video editing created in Adobe Premiere Pro, using sequencing, transitions, audio, pacing, and visual elements to build a cohesive final video.</p>
+        <dl class="project-meta">
+          <div>
+            <dt>MY ROLE</dt>
+            <dd>Video Editor</dd>
+          </div>
+          <div>
+            <dt>TOOLS</dt>
+            <dd>Adobe Premiere Pro</dd>
+          </div>
+          <div>
+            <dt>TRAINING</dt>
+            <dd>Premiere Pro Essential Training · LinkedIn Learning</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="project-media project-media--video">
+        <video controls playsinline preload="metadata">
+          <source src="assets/videos/premiere-showcase.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
       </div>
     </article>
   </main>
@@ -332,6 +364,16 @@
   </div>
 
   <script src="js/site.js"></script>
+  <script>
+    // 04 video: click anywhere on the picture to play/pause.
+    // The native control bar (play arrow, scrubber, volume) is unaffected —
+    // browsers keep those clicks from reaching this handler.
+    document.querySelectorAll('.project-media--video video').forEach(function (v) {
+      v.addEventListener('click', function () {
+        if (v.paused) { v.play(); } else { v.pause(); }
+      });
+    });
+  </script>
   <script src="js/carousel.js?v=4"></script>
   <script src="js/gallery.js?v=1"></script>
 </body>
