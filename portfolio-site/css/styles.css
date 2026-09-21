@@ -875,7 +875,10 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
 @media (max-width: 1100px) {
   .hero { grid-template-columns: 1fr; }
   .hero-title { white-space: normal; } /* let the title wrap once stacked */
-  .hero-photo { margin: 64px auto 0; }  /* stacked: center photo, drop the big Figma offset */
+  .hero-photo {
+    margin: 64px auto 0;          /* stacked: center the photo */
+    justify-self: center;         /* belt-and-suspenders: center in the grid too */
+  }
   .skills { grid-template-columns: 1fr; gap: 32px; }
 }
 
