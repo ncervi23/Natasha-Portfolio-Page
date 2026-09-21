@@ -929,3 +929,53 @@ body.carousel-open { overflow: hidden; } /* lock page scroll while the gallery i
     margin-top: 10px;
   }
 }
+
+/* ==========================================================================
+   DESKTOP TYPOGRAPHY SCALE (≥1200px) — 2026-09-21
+   Refined, slightly smaller type at 100% zoom. Layout, spacing, images and
+   hierarchy ratios are untouched; below 1200px every size above still applies.
+   H1s ~12–15% smaller; large intro/body copy lands in the 21–24px range.
+   ========================================================================== */
+@media (min-width: 1200px) {
+  /* Home */
+  .hero-hi      { font-size: clamp(24px, 1.85vw, 27px); }
+  .hero-title   { font-size: clamp(36px, 4vw, 56px); }
+  .hero-intro   { font-size: clamp(20px, 1.5vw, 23px); }
+  .home-cta a   { font-size: clamp(20px, 1.65vw, 24px); }
+
+  /* Work */
+  .work-title     { font-size: clamp(52px, 5.3vw, 78px); }
+  .work-sub       { font-size: clamp(19px, 1.6vw, 23px); }
+  .project-num    { font-size: clamp(22px, 2.15vw, 30px); }
+  .project-title  { font-size: clamp(26px, 2.5vw, 35px); }
+  .project-tags   { font-size: clamp(18px, 1.45vw, 21px); }
+  .project-desc   { font-size: clamp(18px, 1.55vw, 22px); }
+  .case-link      { font-size: clamp(18px, 1.55vw, 22px); }
+  .more-work-title{ font-size: clamp(28px, 2.6vw, 38px); }
+  .more-work-sub  { font-size: clamp(16px, 1.4vw, 20px); }
+
+  /* Resume */
+  .resume-head h1  { font-size: clamp(48px, 4.6vw, 66px); }
+  .resume-sub      { font-size: clamp(20px, 1.65vw, 24px); line-height: 1.5; }
+  .job-title       { font-size: clamp(22px, 1.95vw, 28px); }
+  .job-meta        { font-size: clamp(16px, 1.5vw, 22px); }
+  .job-tags        { font-size: clamp(14px, 1.35vw, 19px); }
+  .job-desc        { font-size: clamp(16px, 1.55vw, 22px); }
+  .skills-title    { font-size: clamp(28px, 2.5vw, 36px); }
+  .skills h2       { font-size: clamp(28px, 2.4vw, 34px); }
+  .skills li       { font-size: clamp(17px, 1.55vw, 22px); }
+  .edu h2          { font-size: clamp(28px, 2.5vw, 36px); }
+  .edu-item h3     { font-size: clamp(24px, 2.15vw, 31px); }
+  .edu-item p      { font-size: clamp(20px, 1.65vw, 24px); }
+  .resume-download { font-size: clamp(24px, 2.1vw, 30px); }
+
+  /* Contact */
+  .contact-label            { font-size: clamp(22px, 1.85vw, 27px); }
+  .contact-title            { font-size: clamp(44px, 4.85vw, 70px); }
+  .contact-blurb            { font-size: clamp(20px, 1.65vw, 24px); }
+  .contact-card .card-value { font-size: clamp(18px, 1.55vw, 22px); }
+
+  /* Footer (mint-box pages) */
+  .footer-cta h2            { font-size: clamp(28px, 2.8vw, 42px); }
+  .footer-side .footer-link { font-size: clamp(16px, 1.4vw, 20px); }
+}
