@@ -121,12 +121,15 @@
   /* Wire the VIEW CASE STUDY links AND the clickable project hero images */
   Array.prototype.forEach.call(document.querySelectorAll('.case-link[data-carousel], .project-media[data-carousel]'), function (el) {
     el.addEventListener('click', function (e) {
+      /* real links inside the media block (e.g. VISIT LIVE SITE) navigate normally */
+      if (e.target.closest && e.target.closest('a')) { return; }
       e.preventDefault();
       open(el.getAttribute('data-carousel'));
     });
     /* hero images are divs, not links — add keyboard support (Enter / Space) */
     if (el.tagName !== 'A') {
       el.addEventListener('keydown', function (e) {
+        if (e.target.closest && e.target.closest('a')) { return; }
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           open(el.getAttribute('data-carousel'));
