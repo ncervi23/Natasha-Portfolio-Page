@@ -121,15 +121,19 @@
   /* Wire the VIEW CASE STUDY links AND the clickable project hero images */
   Array.prototype.forEach.call(document.querySelectorAll('.case-link[data-carousel], .project-media[data-carousel]'), function (el) {
     el.addEventListener('click', function (e) {
-      /* real links inside the media block (e.g. VISIT LIVE SITE) navigate normally */
-      if (e.target.closest && e.target.closest('a')) { return; }
+      /* real links nested INSIDE the media block (e.g. VISIT LIVE SITE) navigate
+         normally — but the bound element itself is often the <a>, so only bail
+         for inner links, never for the element we bound to */
+      var link = e.target.closest && e.target.closest('a');
+      if (link && link !== el) { return; }
       e.preventDefault();
       open(el.getAttribute('data-carousel'));
     });
     /* hero images are divs, not links — add keyboard support (Enter / Space) */
     if (el.tagName !== 'A') {
       el.addEventListener('keydown', function (e) {
-        if (e.target.closest && e.target.closest('a')) { return; }
+        var link = e.target.closest && e.target.closest('a');
+        if (link && link !== el) { return; }
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           open(el.getAttribute('data-carousel'));
